@@ -1,5 +1,7 @@
 // import { Slider } from "./components/slider";
 
+import Otp from "./components/Otp";
+
 // const dataSlides = [1, 2, 3];
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
             );
           })}
         </Slider> */}
+        <Otp />
       </main>
     </>
   );
