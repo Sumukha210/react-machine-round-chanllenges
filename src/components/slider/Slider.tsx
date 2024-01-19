@@ -20,6 +20,7 @@ const Slider: React.FC<SliderProps> = ({
 }) => {
   const { activeSlideSet, handleNextBtn, handlePrevBtn, slideWidth } =
     useSlider({ slideToShow, slideGap, containerPadding });
+
   return (
     <section className={twMerge(`mt-10 ${className}`)}>
       <SliderWrapper

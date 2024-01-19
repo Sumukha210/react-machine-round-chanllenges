@@ -1,14 +1,15 @@
-import { Slider } from "./components/slider";
+// import { Slider } from "./components/slider";
 
-const dataSlides = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+// const dataSlides = [1, 2, 3];
 
 const App = () => {
   return (
     <>
       <main>
-        <Slider
+        {/* <Slider
+          className="mt-6"
           containerPadding={50}
-          slideToShow={3}
+          slideToShow={4}
           slideGap={15}
           numberOfSlides={dataSlides.length}
         >
@@ -16,13 +17,13 @@ const App = () => {
             return (
               <div
                 key={index}
-                className={`border border-gray-600 grid place-items-center h-32`}
+                className={`border border-gray-600 grid place-items-center h-10`}
               >
-                <h3 className="text-5xl font-semibold">{slide}</h3>
+                <h3 className="text-3xl font-semibold">{slide}</h3>
               </div>
             );
           })}
-        </Slider>
+        </Slider> */}
       </main>
     </>
   );
