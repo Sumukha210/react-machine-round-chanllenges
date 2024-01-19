@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 interface OtpProps {}
@@ -9,10 +9,20 @@ const Otp: React.FC<OtpProps> = () => {
   const NUMBER_OF_INPUTS = 4;
   const fillValues = [...Array(NUMBER_OF_INPUTS).fill("")];
   const [inputValues, setInputValues] = useState(fillValues);
-  const fieldsetRef = useRef<HTMLDivElement | null>(null);
+  const fieldsetRef = useRef<HTMLFieldSetElement>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const moveCursor = (ele: inputElement) => {
+  useEffect(() => {
+    if (fieldsetRef.current) {
+      const firstInput = fieldsetRef.current.childNodes[0];
+      setInputFocus(firstInput);
+    }
+  }, []);
+
+  const setInputFocus = (ele: ChildNode) =>
+    ele instanceof Element && (ele as HTMLElement).focus();
+
+  const moveCursor = (ele: React.ChangeEvent<HTMLInputElement>) => {
     const inputVal = Number(ele.target.dataset?.inputnum);
 
     if (!fieldsetRef.current || !buttonRef.current) return;
@@ -23,16 +33,20 @@ const Otp: React.FC<OtpProps> = () => {
       return;
     }
 
-    console.log(inputVal);
-    if (inputVal < NUMBER_OF_INPUTS) {
-      fieldsetRef.current.childNodes[inputVal + 1].focus();
-    }
+    const nextInput = fieldsetRef.current.childNodes[inputVal + 1];
+    setInputFocus(nextInput);
   };
 
   const handleInputFieldChange = (index: number) => (e: inputElement) => {
+    const inputVal = e.target.value;
     setInputValues((prev) => {
       const newVal = [...prev];
-      newVal[index] = e.target.value;
+      if (newVal[index]?.length) {
+        newVal[index] = inputVal[1];
+
+        return newVal;
+      }
+      newVal[index] = inputVal;
 
       return newVal;
     });
